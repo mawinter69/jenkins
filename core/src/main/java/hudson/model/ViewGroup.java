@@ -33,6 +33,7 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import jenkins.model.Jenkins;
+import jenkins.views.ViewsTabBarUserProperty;
 
 /**
  * Container of {@link View}s.
@@ -159,4 +160,23 @@ public interface ViewGroup extends Saveable, ModelObject, AccessControlled {
         return Jenkins.get().getActions();
     }
 
+    /**
+     * Returns the ViewsTabBar that the user has configured.
+     *
+     * @return users TabBar
+     * @since TODO
+     */
+    default ViewsTabBar getUserViewsTabBar() {
+        User user = User.current();
+        if (user != null) {
+            ViewsTabBarUserProperty myViewsProperty = user.getProperty(ViewsTabBarUserProperty.class);
+            if (myViewsProperty != null) {
+                ViewsTabBar userViewTabsBars = myViewsProperty.getViewsTabBar();
+                if (userViewTabsBars != null) {
+                    return userViewTabsBars;
+                }
+            }
+        }
+        return getViewsTabBar();
+    }
 }
