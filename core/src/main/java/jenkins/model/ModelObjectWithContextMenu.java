@@ -37,6 +37,7 @@ import org.jenkins.ui.symbol.Symbol;
 import org.jenkins.ui.symbol.SymbolRequest;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.DoNotUse;
+import org.kohsuke.accmod.restrictions.NoExternalUse;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
@@ -275,16 +276,8 @@ public interface ModelObjectWithContextMenu extends ModelObject {
                     .withUrl(job.getSearchUrl()));
         }
 
-        /**
-         * Creates a MenuItem and returns it for further configuration.
-         *
-         * Used only in task.jelly
-         * @return this
-         * @deprecated use {@link #createMenuItem(String, String, String, String)} instead and call the setters
-         */
         // Used in Jelly! - task.jelly
-        @Restricted(DoNotUse.class)
-        @Deprecated(forRemoval = true, since = "TODO")
+        @Restricted(NoExternalUse.class)
         public ContextMenu add(String url, String icon, String iconXml, String text, boolean post, boolean requiresConfirmation, Badge badge, String message) {
             if (text != null && icon != null && url != null) {
                 MenuItem item = new MenuItem().withUrl(url).withIcon(icon).withDisplayName(text);
@@ -551,6 +544,10 @@ public interface ModelObjectWithContextMenu extends ModelObject {
 
         public void setDestructive(boolean destructive) {
             this.destructive = destructive;
+        }
+
+        public void setBadge(Badge badge) {
+            this.badge = badge;
         }
     }
 
