@@ -170,7 +170,7 @@ public interface ModelObjectWithContextMenu extends ModelObject {
         }
 
         /**
-         * Creates a MenuItem and returns it for further configuration
+         * Creates a MenuItem and returns it for further configuration.
          *
          * Used only in task.jelly
          * @return the created MenuItem or null if url, icon or text are null
@@ -179,8 +179,7 @@ public interface ModelObjectWithContextMenu extends ModelObject {
         @CheckForNull
         public MenuItem createMenuItem(String url, String icon, String iconXml, String text) {
             if (text != null && icon != null && url != null) {
-                MenuItem item = new MenuItem(url, icon, text);
-                item.iconXml = iconXml;
+                MenuItem item = new MenuItem().withUrl(url).withIcon(icon).withDisplayName(text).withIconXml(iconXml);
                 items.add(item);
                 return item;
             }
@@ -276,7 +275,16 @@ public interface ModelObjectWithContextMenu extends ModelObject {
                     .withUrl(job.getSearchUrl()));
         }
 
+        /**
+         * Creates a MenuItem and returns it for further configuration.
+         *
+         * Used only in task.jelly
+         * @return this
+         * @deprecated use {@link #createMenuItem(String, String, String, String)} instead and call the setters
+         */
         // Used in Jelly! - task.jelly
+        @Restricted(DoNotUse.class)
+        @Deprecated(forRemoval = true, since = "TODO")
         public ContextMenu add(String url, String icon, String iconXml, String text, boolean post, boolean requiresConfirmation, Badge badge, String message) {
             if (text != null && icon != null && url != null) {
                 MenuItem item = new MenuItem().withUrl(url).withIcon(icon).withDisplayName(text);
@@ -458,10 +466,6 @@ public interface ModelObjectWithContextMenu extends ModelObject {
             return destructive;
         }
 
-        public MenuItem(String url, String icon, String displayName) {
-            withUrl(url).withIcon(icon).withDisplayName(displayName);
-        }
-      
         public MenuItem() {
         }
 
