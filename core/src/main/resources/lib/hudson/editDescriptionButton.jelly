@@ -33,9 +33,11 @@
 
     <l:hasPermission permission="${permission}">
         <st:adjunct includes="lib.form.textarea.textarea"/>
-        <st:adjunct includes="
-        org.kohsuke.stapler.codemirror.mode.${app.markupFormatter.codeMirrorMode}.${app.markupFormatter.codeMirrorMode},
-        org.kohsuke.stapler.codemirror.theme.default"/>
+        <j:if test="${app.markupFormatter.codeMirrorMode != null}">
+            <st:adjunct includes="
+            org.kohsuke.stapler.codemirror.mode.${app.markupFormatter.codeMirrorMode}.${app.markupFormatter.codeMirrorMode},
+            org.kohsuke.stapler.codemirror.theme.default"/>
+        </j:if>
 
         <j:set var="submissionUrl" value="${args.submissionUrl}" defaultValue="submitDescription"/>
         <j:invokeStatic className="hudson.Util" method="isSafeToRedirectTo" var="isSafeToRedirectTo">
@@ -45,10 +47,10 @@
             <j:set var="submissionUrl" value="submitDescription"/>
         </j:if>
 
-        <template id="edit-description-template">
+        <template id="edit-description-template" data-description="${actualDescription}">
             <f:form method="post" action="${submissionUrl}">
                 <f:entry help="${app.markupFormatter.helpUrl}">
-                    <f:textarea name="description" value="${actualDescription}"
+                        <f:textarea name="description" id="description-textarea"
                                 codemirror-mode="${app.markupFormatter.codeMirrorMode}"
                                 codemirror-config="${app.markupFormatter.codeMirrorConfig}"
                                 previewEndpoint="/markupFormatter/previewDescription"
@@ -61,6 +63,7 @@
              id="description-link"
              href="#"
              data-title="${label}"
+             data-url="${submissionUrl}"
              tooltip="${attrs.compact ? label : null}">
             <l:icon src="symbol-description" />
             <j:if test="${!attrs.compact}">
