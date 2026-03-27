@@ -5,6 +5,11 @@
     const form = template.content.firstElementChild.cloneNode(true);
     const textarea = form.querySelector("#description-textarea");
     textarea.value = template.dataset.description;
+    form.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.stopPropagation();
+      }
+    });
 
     dialog
       .form(form, {
@@ -23,6 +28,7 @@
           body: new URLSearchParams({ description }),
         }).then((response) => {
           if (response.ok) {
+            template.dataset.description = description;
             fetch(rootURL + "/markupFormatter/previewDescription", {
               method: "post",
               headers: crumb.wrap({
