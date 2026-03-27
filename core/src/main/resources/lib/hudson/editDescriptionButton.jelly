@@ -64,10 +64,13 @@
              href="#"
              data-title="${label}"
              data-url="${submissionUrl}"
+             data-add-label="${%add description}"
+             data-edit-label="${%edit description}"
+             data-compact="${attrs.compact}"
              tooltip="${attrs.compact ? label : null}">
             <l:icon src="symbol-description" />
             <j:if test="${!attrs.compact}">
-                ${label}
+                <span>${label}</span>
             </j:if>
         </a>
     </l:hasPermission>

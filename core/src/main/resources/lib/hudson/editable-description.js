@@ -4,7 +4,11 @@
     const title = button.dataset.title;
     const form = template.content.firstElementChild.cloneNode(true);
     const textarea = form.querySelector("#description-textarea");
-    textarea.value = template.dataset.description;
+    let actualDescription = template.dataset.description;
+    if (actualDescription == null) {
+      actualDescription = "";
+    }
+    textarea.value = actualDescription;
     form.addEventListener("keydown", function (e) {
       if (e.key === "Enter") {
         e.stopPropagation();
@@ -40,11 +44,21 @@
             }).then((rsp) => {
               rsp.text().then((responseText) => {
                 if (rsp.ok) {
-                  const description = document.getElementById(
+                  const descriptionDiv = document.getElementById(
                     "description-content",
                   );
-                  if (description != null) {
-                    description.innerHTML = responseText;
+                  if (descriptionDiv != null) {
+                    descriptionDiv.innerHTML = responseText;
+                  }
+                  let label = button.dataset.addLabel;
+                  if (description != null && description != "") {
+                    label = button.dataset.editLabel;
+                  }
+                  if (button.dataset.compact === "true") {
+                    button.setAttribute("tooltip", label);
+                    Behaviour.applySubtree(button, true);
+                  } else {
+                    button.querySelector("span").textContent = label;
                   }
                 } else {
                   window.location.reload();
