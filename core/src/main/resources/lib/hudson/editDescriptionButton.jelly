@@ -61,7 +61,7 @@
         <st:adjunct includes="lib.hudson.editable-description" />
         <a class="jenkins-button jenkins-hidden ${attrs.compact ? 'jenkins-details__button' : ''}"
              id="description-link"
-             href="#"
+             href="editDescription"
              data-title="${label}"
              data-url="${submissionUrl}"
              data-add-label="${%add description}"

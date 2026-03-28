@@ -51,7 +51,7 @@
                     descriptionDiv.innerHTML = responseText;
                   }
                   let label = button.dataset.addLabel;
-                  if (description != null && description != "") {
+                  if (description !== null && description !== "") {
                     label = button.dataset.editLabel;
                   }
                   if (button.dataset.compact === "true") {
