@@ -30,7 +30,7 @@ THE SOFTWARE.
 
   <j:set var="controls">
     <l:overflowButton icon="symbol-menu" clazz="jenkins-card__reveal">
-      <j:if test="${h.isDevelopmentMode}">
+      <j:if test="${h.developmentMode}">
         <dd:item icon="symbol-pause"
                  text="${%Pause auto refresh}"
                  id="pause-history-widget-updates"

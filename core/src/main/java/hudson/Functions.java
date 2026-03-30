@@ -2380,7 +2380,7 @@ public class Functions {
     /**
      * Returns true if we are in development mode.
      */
-    public static boolean getIsDevelopmentMode() {
+    public static boolean isDevelopmentMode() {
         return Main.isDevelopmentMode;
     }
 
