@@ -1,0 +1,77 @@
+@use "../base/breakpoints";
+@use "../components/cards";
+@use "../components/dialogs";
+
+.app-agent-content .jenkins-card:has(.jenkins-card__content:empty),
+.app-agent-content .widget-refresh-reference {
+  display: none;
+}
+
+.app-agent-content .tabBar {
+  width: fit-content;
+}
+
+.app-agent-content #projectStatus,
+.app-agent-content #executors,
+.app-agent-content #buildQueue {
+  margin-bottom: 0;
+}
+
+.app-agent__script-console {
+  max-width: 900px;
+  margin: auto;
+}
+
+.app-agent-overview__content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--section-padding) / 2);
+ }
+
+.app-agent-overview__grid {
+  gap: calc(var(--section-padding) / 2);
+  display: flex;
+
+  &> div:nth-last-child(n+3) {
+    min-width: 280px;
+    max-width: 330px;
+  }
+
+  &> div:nth-last-child(2) {
+    flex-grow: 1;   /* takes remaining space */
+    min-width: 0;   /* important for overflow handling */
+  }
+
+  &> div:last-of-type {
+    flex-shrink: 0;
+  }
+
+  .jenkins-table {
+    margin-bottom: 0;
+    border-spacing: 2px;
+    td {
+      padding-right: calc(var(--table-padding) * 2);
+    }
+  }
+}
+
+.app-agent-overview__app-bar-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.app-agent-overview__app-bar-controls .jenkins-details__button {
+  min-height: 2.375rem;
+}
+
+.app-agent-overview__labels {
+  flex-direction: row!important;
+  flex-wrap: wrap;
+
+  .jenkins-notice {
+    margin-bottom: 0;
+    min-height: revert;
+  }
+}

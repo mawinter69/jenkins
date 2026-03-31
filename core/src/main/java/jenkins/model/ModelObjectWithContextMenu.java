@@ -296,8 +296,8 @@ public interface ModelObjectWithContextMenu extends ModelObject {
         }
 
         public ContextMenu from(ModelObjectWithContextMenu self, StaplerRequest2 request, StaplerResponse2 response, String view) throws JellyException, IOException {
-            // Only Runs support getAppBarActions currently
-            if (self instanceof Run) {
+            // Only Runs and Computers support getAppBarActions currently
+            if (self instanceof Run || self instanceof Computer) {
                 boolean menuOnly = Boolean.parseBoolean(request.getParameter("menu-only"));
 
                 List<Action> actions = ((Actionable) self).getAppBarActions().stream()

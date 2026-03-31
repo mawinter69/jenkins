@@ -113,6 +113,7 @@ import jenkins.model.DisplayExecutor;
 import jenkins.model.IComputer;
 import jenkins.model.IDisplayExecutor;
 import jenkins.model.Jenkins;
+import jenkins.model.Tab;
 import jenkins.search.SearchGroup;
 import jenkins.security.ExtendedReadRedaction;
 import jenkins.security.ImpersonatingExecutorService;
@@ -1736,6 +1737,14 @@ public /*transient*/ abstract class Computer extends Actionable implements Acces
         public long getWhen() {
             return when;
         }
+    }
+
+    /**
+     * Retrieves the tabs for a given job
+     */
+    @Restricted(NoExternalUse.class)
+    public List<Tab> getAgentTabs() {
+        return getActions(Tab.class).stream().filter(e -> e.getIconFileName() != null).toList();
     }
 
     public static final PermissionGroup PERMISSIONS = new PermissionGroup(Computer.class, Messages._Computer_Permissions_Title());

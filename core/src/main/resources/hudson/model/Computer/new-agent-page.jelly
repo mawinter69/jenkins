@@ -1,0 +1,8 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler">
+  <j:new className="jenkins.agent.OverviewTab" var="overviewTab">
+    <j:arg value="${it}"/>
+  </j:new>
+
+  <st:include page="index.jelly" from="${overviewTab}" it="${overviewTab}"/>
+</j:jelly>
