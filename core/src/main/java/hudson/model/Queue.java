@@ -2399,7 +2399,6 @@ public class Queue extends ResourceController implements Saveable {
             return Collections.emptyList();
         }
 
-        @Restricted(DoNotUse.class) // used from Jelly
         private Map<Cause, Integer> getCauseCounts() {
             CauseAction ca = getAction(CauseAction.class);
             if (ca != null)
