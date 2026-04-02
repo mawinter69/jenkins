@@ -9,7 +9,8 @@
       Severity of the alert, one of info, warning, danger or success. Defaults to warning if not specified.
     </st:attribute>
     <st:attribute name="dismissable" use="optional">
-      If the alert can be dismissed by the user, defaults to true if not specified.
+      If the alert can be dismissed by the user, defaults to true if not specified. Dismissed alerts can be re-enabled
+      in the global configuration.
     </st:attribute>
     <st:attribute name="dismissValue" use="optional">
       The value of the dismiss tooltip. Defaults to "Dismiss" if not specified.
@@ -20,11 +21,20 @@
     <st:attribute name="id" use="optional">
       The id attribute to add to the alert div.
     </st:attribute>
-    <st:attribute name="controls" use="optional">
+    <st:attribute name="controls" use="optional"><![CDATA[
       Shows additional controls in the top right of the alert besides the dismiss button.
+
+      Define the controls like this:
+
+      <j:set var="controls">
+        <form method="post" name="clear" action="${rootURL}/${it.url}/clear">
+          <f:submit value="${%Clear}"/>
+        </form>
+      </j:set>
 
       To be able to set controls, You must use a message.jelly. It is not possible
       to do this in groovy.
+      ]]>
     </st:attribute>
 
   </st:documentation>

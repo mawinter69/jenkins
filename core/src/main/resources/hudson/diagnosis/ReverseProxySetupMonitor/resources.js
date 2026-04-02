@@ -30,12 +30,12 @@
   };
 
   var displayWarningMessage = function (withContextMessage) {
-    redirectForm.classList.remove("reverse-proxy__hidden");
+    redirectForm.classList.remove("jenkins-hidden");
     if (withContextMessage === true) {
       redirectForm
         .querySelectorAll(".js-context-message")
         .forEach(function (node) {
-          return node.classList.remove("reverse-proxy__hidden");
+          return node.classList.remove("jenkins-hidden");
         });
     }
   };
