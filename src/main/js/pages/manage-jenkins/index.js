@@ -22,7 +22,9 @@ searchBarInput.suggestions = function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const messagesContainer = document.querySelector(".manage-messages");
-  if (!messagesContainer) return;
+  if (!messagesContainer) {
+    return;
+  }
 
   const updateLastVisibleMessageMargin = () => {
     const messageDivs = Array.from(messagesContainer.children).filter(
@@ -51,7 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let rafId = null;
   const scheduleUpdate = () => {
-    if (rafId !== null) return;
+    if (rafId !== null) {
+      return;
+    }
     rafId = requestAnimationFrame(() => {
       rafId = null;
       updateLastVisibleMessageMargin();
