@@ -1,7 +1,7 @@
 <!--
 The MIT License
 
-Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
+Copyright (c) 2023, Jenkins project contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,28 @@ THE SOFTWARE.
 -->
 
 <?jelly escape-by-default='true'?>
-<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
-  <l:agent-subpage title="${%Load Statistics}" agent="${it}">
-    <l:app-bar title="${%Load Statistics}" />
-    <st:include page="main.jelly" from="${it.loadStatistics}" />
-  </l:agent-subpage>
+<j:jelly xmlns:j="jelly:core" xmlns:l="/lib/layout" xmlns:f="/lib/form" xmlns:st="jelly:stapler">
+  <j:if test="${it.manualLaunchAllowed}">
+    <st:include from="${it.launcher}" page="app-bar-controls.jelly" optional="true"/>
+  </j:if>
+  <!-- temporarily offline switch -->
+  <j:choose>
+    <j:when test="${it.temporarilyOffline}">
+      <l:hasPermission permission="${it.CONNECT}">
+        <form method="post" action="toggleOffline">
+          <f:submit value="${%submit.temporarilyOffline}"  />
+        </form>
+        <form method="post" action="setOfflineCause">
+          <f:submit primary="false" value="${%submit.updateOfflineCause}"  />
+        </form>
+      </l:hasPermission>
+    </j:when>
+    <j:otherwise>
+      <l:hasPermission permission="${it.DISCONNECT}">
+        <form method="post" action="markOffline">
+          <f:submit primary="false" value="${%submit.not.temporarilyOffline}"  />
+        </form>
+      </l:hasPermission>
+    </j:otherwise>
+  </j:choose>
 </j:jelly>

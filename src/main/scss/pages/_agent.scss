@@ -31,9 +31,10 @@
 .app-agent-overview__grid {
   gap: calc(var(--section-padding) / 2);
   display: flex;
+  flex-wrap: wrap;
 
   &> div:nth-last-child(n+3) {
-    min-width: 280px;
+    min-width: 274px;
     max-width: 330px;
   }
 

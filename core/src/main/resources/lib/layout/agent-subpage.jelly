@@ -66,6 +66,7 @@ THE SOFTWARE.
             </div>
 
             <div class="app-build-bar__controls">
+              <st:include page="app-bar-controls.jelly" from="${attrs.agent}" it="${attrs.agent}"/>
               <l:actions it="${attrs.agent}" />
             </div>
           </div>
