@@ -8,7 +8,6 @@ import hudson.slaves.SlaveComputer;
 import java.util.Collection;
 import java.util.Set;
 import jenkins.model.TransientActionFactory;
-import jenkins.model.experimentalflags.NewAgentPageUserExperimentalFlag;
 import jenkins.model.menu.Group;
 import jenkins.model.menu.Semantic;
 
@@ -24,13 +23,6 @@ public class DisconnectAgentAction extends TransientActionFactory<SlaveComputer>
     @Override
     public Collection<? extends Action> createFor(@NonNull SlaveComputer target) {
         if (!target.hasPermission(Computer.DISCONNECT)) {
-            return Set.of();
-        }
-
-        Boolean newAgentPageEnabled = new NewAgentPageUserExperimentalFlag().getFlagValue();
-
-        // This condition can be removed when the flag has been removed
-        if (!newAgentPageEnabled) {
             return Set.of();
         }
 

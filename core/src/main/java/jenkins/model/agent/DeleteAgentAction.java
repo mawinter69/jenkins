@@ -24,14 +24,12 @@ public class DeleteAgentAction extends TransientActionFactory<Computer> {
     @NonNull
     @Override
     public Collection<? extends Action> createFor(@NonNull Computer target) {
-        if (!target.hasPermission(Computer.DELETE)) {
+        Boolean newAgentPageEnabled = new NewAgentPageUserExperimentalFlag().getFlagValue();
+        if (!newAgentPageEnabled) {
             return Set.of();
         }
 
-        Boolean newAgentPageEnabled = new NewAgentPageUserExperimentalFlag().getFlagValue();
-
-        // This condition can be removed when the flag has been removed
-        if (!newAgentPageEnabled) {
+        if (!target.hasPermission(Computer.DELETE)) {
             return Set.of();
         }
 
@@ -58,7 +56,7 @@ public class DeleteAgentAction extends TransientActionFactory<Computer> {
 
             @Override
             public Event getEvent() {
-                return ConfirmationEvent.of(Messages.DeleteAgentFactory_DeleteDialog_Title(), Messages.DeleteAgentFactory_DeleteDialog_Description(),  "doDelete");
+                return ConfirmationEvent.of(Messages.DeleteAgentFactory_DeleteDialog_Title(), Messages.DeleteAgentFactory_DeleteDialog_Description(target.getName()),  "doDelete");
             }
 
             @Override

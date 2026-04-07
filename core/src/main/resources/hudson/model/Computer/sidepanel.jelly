@@ -29,27 +29,17 @@ THE SOFTWARE.
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
   <l:header />
   <l:side-panel>
-    <l:userExperimentalFlag var="newAgentPage" flagClassName="jenkins.model.experimentalflags.NewAgentPageUserExperimentalFlag" />
-    <j:choose>
-        <j:when test="${newAgentPage}">
-          <l:tasks>
-            <t:actions />
-            <st:include page="sidepanel2.jelly" optional="true" /><!-- hook for derived class to add more items -->
-          </l:tasks>
-        </j:when>
-        <j:otherwise>
-          <l:tasks>
-            <l:task contextMenu="false" href="${rootURL}/${it.url}" icon="${it.iconClassName}" title="${%Status}"/>
-            <t:actions />
-            <st:include page="sidepanel2.jelly" optional="true" /><!-- hook for derived class to add more items -->
-          </l:tasks>
-          <j:forEach var="box" items="${it.computerPanelBoxs}">
-            <st:include it="${box}" page="box.jelly" />
-          </j:forEach>
-          <j:forEach var="w" items="${it.widgets}">
-            <st:include it="${w}" page="index" />
-          </j:forEach>
-        </j:otherwise>
-    </j:choose>
+    <l:tasks>
+      <l:task contextMenu="false" href="${rootURL}/${it.url}" icon="${it.iconClassName}" title="${%Status}"/>
+      <l:delete permission="${it.DELETE}" title="${%Delete Agent}" message="${%delete.confirm(it.name)}" urlPrefix="${rootURL}/${it.url}"/>
+      <t:actions />
+      <st:include page="sidepanel2.jelly" optional="true" /><!-- hook for derived class to add more items -->
+    </l:tasks>
+    <j:forEach var="box" items="${it.computerPanelBoxs}">
+      <st:include it="${box}" page="box.jelly" />
+    </j:forEach>
+    <j:forEach var="w" items="${it.widgets}">
+      <st:include it="${w}" page="index" />
+    </j:forEach>
   </l:side-panel>
 </j:jelly>

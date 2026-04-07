@@ -17,33 +17,28 @@
   margin-bottom: 0;
 }
 
-.app-agent__script-console {
-  max-width: 900px;
-  margin: auto;
-}
-
 .app-agent-overview__content {
   display: flex;
   flex-direction: column;
   gap: calc(var(--section-padding) / 2);
- }
+}
 
 .app-agent-overview__grid {
   gap: calc(var(--section-padding) / 2);
   display: flex;
   flex-wrap: wrap;
 
-  &> div:nth-last-child(n+3) {
+  & > div:nth-last-child(n + 3) {
     min-width: 274px;
     max-width: 330px;
   }
 
-  &> div:nth-last-child(2) {
-    flex-grow: 1;   /* takes remaining space */
-    min-width: 0;   /* important for overflow handling */
+  & > div:nth-last-child(2) {
+    flex-grow: 1; /* takes remaining space */
+    min-width: 0; /* important for overflow handling */
   }
 
-  &> div:last-of-type {
+  & > div:last-of-type {
     flex-shrink: 0;
   }
 
@@ -68,7 +63,7 @@
 }
 
 .app-agent-overview__labels {
-  flex-direction: row!important;
+  flex-direction: row !important;
   flex-wrap: wrap;
 
   .jenkins-notice {
