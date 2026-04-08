@@ -13,6 +13,7 @@ public class LogTab extends Tab {
     public String getDisplayName() {
         return "Log";
     }
+
     @Override
     public String getIconFileName() {
         return "symbol-logs";

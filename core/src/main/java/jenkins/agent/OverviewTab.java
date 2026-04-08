@@ -13,6 +13,7 @@ public class OverviewTab extends Tab {
     public String getDisplayName() {
         return "Overview";
     }
+
     @Override
     public String getIconFileName() {
         return "symbol-overview";
