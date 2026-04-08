@@ -7,7 +7,6 @@ import hudson.model.Computer;
 import java.util.Collection;
 import java.util.Set;
 import jenkins.model.TransientActionFactory;
-import jenkins.model.experimentalflags.NewAgentPageUserExperimentalFlag;
 import jenkins.model.menu.Group;
 import jenkins.model.menu.Semantic;
 import jenkins.model.menu.event.ConfirmationEvent;
@@ -24,11 +23,6 @@ public class DeleteAgentAction extends TransientActionFactory<Computer> {
     @NonNull
     @Override
     public Collection<? extends Action> createFor(@NonNull Computer target) {
-        Boolean newAgentPageEnabled = new NewAgentPageUserExperimentalFlag().getFlagValue();
-        if (!newAgentPageEnabled) {
-            return Set.of();
-        }
-
         if (!target.hasPermission(Computer.DELETE)) {
             return Set.of();
         }
