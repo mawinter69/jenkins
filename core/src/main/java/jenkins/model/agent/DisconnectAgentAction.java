@@ -34,7 +34,7 @@ public class DisconnectAgentAction extends TransientActionFactory<SlaveComputer>
 
             @Override
             public String getIconFileName() {
-                return "symbol-disconnect";
+                return target.getChannel() != null ? "symbol-disconnect" : null;
             }
 
             @Override
