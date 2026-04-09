@@ -21,7 +21,7 @@ public class LogTabFactory extends TransientActionFactory<SlaveComputer> {
     @NonNull
     @Override
     public Collection<? extends Tab> createFor(@NonNull SlaveComputer computer) {
-        if (!computer.hasAnyPermission(Computer.EXTENDED_READ_AND_CONNECT)) {
+        if (!computer.hasAnyPermission(Computer.EXTENDED_READ, Computer.CONNECT)) {
             return Collections.emptyList();
         }
 

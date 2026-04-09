@@ -21,7 +21,7 @@ public class SystemInfoAction extends TransientActionFactory<SlaveComputer> {
     @NonNull
     @Override
     public Collection<? extends Action> createFor(@NonNull SlaveComputer target) {
-        if (!target.hasAnyPermission(Computer.EXTENDED_READ_AND_CONNECT)) {
+        if (!target.hasAnyPermission(Computer.EXTENDED_READ, Computer.CONNECT)) {
             return Set.of();
         }
 
