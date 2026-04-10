@@ -33,13 +33,9 @@
     max-width: 330px;
   }
 
-  & > div:nth-last-child(2) {
+  & > div:last-of-type {
     flex-grow: 1; /* takes remaining space */
     min-width: 0; /* important for overflow handling */
-  }
-
-  & > div:last-of-type {
-    flex-shrink: 0;
   }
 
   .jenkins-table {
@@ -52,15 +48,8 @@
   }
 }
 
-.app-agent-overview__app-bar-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-.app-agent-overview__app-bar-controls .jenkins-details__button {
-  min-height: 2.375rem;
+.app-agent-content .jenkins-details .jenkins-button {
+  min-height: 2rem;
 }
 
 .app-agent-overview__labels {

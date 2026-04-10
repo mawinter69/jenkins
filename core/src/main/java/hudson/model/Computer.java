@@ -114,6 +114,9 @@ import jenkins.model.IComputer;
 import jenkins.model.IDisplayExecutor;
 import jenkins.model.Jenkins;
 import jenkins.model.Tab;
+import jenkins.model.details.Detail;
+import jenkins.model.details.DetailFactory;
+import jenkins.model.details.MonitoringDetails;
 import jenkins.search.SearchGroup;
 import jenkins.security.ExtendedReadRedaction;
 import jenkins.security.ImpersonatingExecutorService;
@@ -1807,4 +1810,18 @@ public /*transient*/ abstract class Computer extends Actionable implements Acces
             new Permission[] { EXTENDED_READ, CONNECT };
 
     private static final Logger LOGGER = Logger.getLogger(Computer.class.getName());
+
+    @Extension
+    public static final class BasicComputerDetailFactory extends DetailFactory<Computer> {
+
+        @Override
+        public Class<Computer> type() {
+            return Computer.class;
+        }
+
+        @NonNull @Override public List<? extends Detail> createFor(@NonNull Computer target) {
+            return List.of(new MonitoringDetails(target));
+        }
+    }
+
 }
