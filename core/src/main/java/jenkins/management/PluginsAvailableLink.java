@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2019 CloudBees, Inc.
+ * Copyright (c) 2025, Jan Faracik
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package jenkins.security.ResourceDomainRecommendation
 
-def f = namespace(lib.FormTagLib)
-def l = namespace(lib.LayoutTagLib)
+package jenkins.management;
 
-dl {
-    div(class: "jenkins-alert jenkins-alert-info") {
-        a(name: "resource-root-url")
-        l.isAdmin() {
-          form(method: "post", action: "${rootURL}/${my.url}/act") {
-              f.submit(name: 'redirect', value: _("Configure resource root URL"))
-              f.submit(name: 'dismiss', value: _("Dismiss"))
-            }
+import edu.umd.cs.findbugs.annotations.NonNull;
+import hudson.Extension;
+import hudson.model.ManagementLink;
+import hudson.security.Permission;
+import jenkins.model.Jenkins;
+import jenkins.model.experimentalflags.NewManageJenkinsUserExperimentalFlag;
+
+@Extension(ordinal = Integer.MAX_VALUE - 1)
+public class PluginsAvailableLink extends ManagementLink {
+
+    @Override
+    public String getIconFileName() {
+        var flagEnabled = new NewManageJenkinsUserExperimentalFlag().getFlagValue();
+
+        if (!flagEnabled) {
+            return null;
         }
 
-        raw(_("blurb"))
+        return "symbol-shopping-bag";
+    }
+
+    @Override
+    public String getDisplayName() {
+        return Messages.PluginsAvailableLink_DisplayName();
+    }
+
+    @Override
+    public String getUrlName() {
+        return "pluginManager/available";
+    }
+
+    @NonNull
+    @Override
+    public Permission getRequiredPermission() {
+        return Jenkins.SYSTEM_READ;
+    }
+
+    @NonNull
+    @Override
+    public Category getCategory() {
+        return Category.PLUGINS;
     }
 }
