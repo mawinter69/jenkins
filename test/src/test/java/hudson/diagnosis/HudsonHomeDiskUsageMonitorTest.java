@@ -161,7 +161,6 @@ class HudsonHomeDiskUsageMonitorTest {
      */
     private DomNode getMonitorDiv(HudsonHomeDiskUsageMonitor mon, User user) throws IOException, SAXException {
         HtmlPage p = j.createWebClient().withBasicApiToken(user).goTo("manage");
-        DomNode n = p.getFirstByXPath("//div[@data-monitor-id='" + mon.id + "']");
-        return n;
+        return p.getFirstByXPath("//div[@data-monitor-id='" + mon.id + "']");
     }
 }
