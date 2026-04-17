@@ -38,8 +38,8 @@ f.section(title: _("Administrative monitors"), description: _("blurb")) {
                     div(class: "jenkins-checkbox-help-wrapper") {
                         f.checkbox(name: "administrativeMonitor",
                                 title: am.displayName,
-                                checked: instance.isMonitorEnabled(am.id),
-                                json: am.id)
+                                checked: instance.isMonitorEnabled(am.@id),
+                                json: am.@id)
                         if (am.isSecurity()) {
                             span(style: 'margin-left: 0.5rem', class: 'jenkins-badge', _("Security"))
                         }
