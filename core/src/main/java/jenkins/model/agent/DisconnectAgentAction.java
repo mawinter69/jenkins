@@ -32,8 +32,11 @@ import hudson.slaves.SlaveComputer;
 import java.util.Collection;
 import java.util.Set;
 import jenkins.model.TransientActionFactory;
+import jenkins.model.experimentalflags.NewAgentPageUserExperimentalFlag;
 import jenkins.model.menu.Group;
 import jenkins.model.menu.Semantic;
+import jenkins.model.menu.event.DialogEvent;
+import jenkins.model.menu.event.Event;
 
 @Extension
 public class DisconnectAgentAction extends TransientActionFactory<SlaveComputer> {
@@ -71,13 +74,15 @@ public class DisconnectAgentAction extends TransientActionFactory<SlaveComputer>
                 return "disconnect";
             }
 
-            /*
-             * TODO: use DialogEvent once available
             @Override
             public Event getEvent() {
-                return ConfirmationEvent.of(Messages.DeleteAgentFactory_DeleteDialog_Title(), Messages.DeleteAgentFactory_DeleteDialog_Description(),  "doDelete");
+                boolean newAgentPage = new NewAgentPageUserExperimentalFlag().getFlagValue();
+                if (newAgentPage) {
+                    return DialogEvent.of("disconnectDialog");
+                }
+                return Action.super.getEvent();
             }
-            */
+
             @Override
             public Semantic getSemantic() {
                 return Semantic.DESTRUCTIVE;

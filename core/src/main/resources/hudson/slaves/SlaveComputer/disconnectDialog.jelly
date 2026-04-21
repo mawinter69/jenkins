@@ -1,0 +1,23 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:f="/lib/form">
+  <st:setHeader name="X-Dialog-Title" value="${%disconnect.computer(it.displayName)}" />
+
+  <l:ajax>
+    <form method="post" action="doDisconnect">
+      <f:textarea name="offlineMessage"/>
+      <f:bottomButtonBar>
+        <j:choose>
+          <j:when test="${cancelButton ne 'false'}">
+            <button data-id="cancel" type="button" class="jenkins-button">${%Cancel}</button>
+            <f:submit value="${%Disconnect}" clazz="jenkins-!-destructive-color"/>
+          </j:when>
+          <j:otherwise>
+            <f:submit value="${%Disconnect}" clazz="jenkins-!-destructive-color"/>
+            <a href="./" class="jenkins-button">${%Cancel}</a>
+          </j:otherwise>
+        </j:choose>
+      </f:bottomButtonBar>
+    </form>
+  </l:ajax>
+</j:jelly>
+
