@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2025, Markus Winter
+ * Copyright (c) 2026, Markus Winter
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,13 +30,14 @@ import hudson.model.Action;
 import hudson.model.Computer;
 import hudson.slaves.SlaveComputer;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 import jenkins.model.TransientActionFactory;
 import jenkins.model.experimentalflags.NewAgentPageUserExperimentalFlag;
 import jenkins.model.menu.Group;
 import jenkins.model.menu.Semantic;
-import jenkins.model.menu.event.DialogEvent;
 import jenkins.model.menu.event.Event;
+import jenkins.model.menu.event.JavaScriptEvent;
 
 @Extension
 public class DisconnectAgentAction extends TransientActionFactory<SlaveComputer> {
@@ -78,7 +79,7 @@ public class DisconnectAgentAction extends TransientActionFactory<SlaveComputer>
             public Event getEvent() {
                 boolean newAgentPage = new NewAgentPageUserExperimentalFlag().getFlagValue();
                 if (newAgentPage) {
-                    return DialogEvent.of("disconnectDialog");
+                    return JavaScriptEvent.of(Map.of("type", "dialog-opener", "hide-close-button", "true", "dialog-url", "disconnectDialog"), "");
                 }
                 return Action.super.getEvent();
             }
