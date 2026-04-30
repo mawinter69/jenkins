@@ -44,7 +44,7 @@ import org.kohsuke.accmod.restrictions.Beta;
 /**
  * A reusable app bar action that deletes an item after user confirmation.
  *
- * @since TODO
+ * @since 2.560
  */
 @Restricted(Beta.class)
 public final class DeleteAction implements Action {
